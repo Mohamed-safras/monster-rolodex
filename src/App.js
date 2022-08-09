@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import { getPosts } from "../src/api/api";
+import { ReactComponent as Icon } from "../src/assets/Rolling.svg";
+import "./App.css";
+import PostList from "./PostList";
+import SearchBar from "./SearchBar";
+const App = () => {
+  const [posts, setPosts] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-function App() {
+  useEffect(() => {
+    getPosts()
+      .then((json) => {
+        setPosts(json);
+        return json;
+      })
+      .then((data) => {
+        setSearchResults(data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main className="continer">
+      <SearchBar posts={posts} setSearchResults={setSearchResults} />
+      {isLoading ? <Icon /> : <PostList searchResults={searchResults} />}
+    </main>
   );
-}
+};
 
 export default App;
