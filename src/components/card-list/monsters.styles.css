@@ -1,0 +1,28 @@
+.MonsterRolodexs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.rolodex {
+  background: rgb(51, 212, 215);
+  width: 100%;
+  transition: transform 250ms ease-in-out;
+  transform: scale(1);
+  box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 10px;
+}
+.rolodex:hover {
+  transform: scale(1.1);
+}
+.rolodex img {
+  object-fit: cover;
+}
+.rolodex h1 {
+  font-size: 18px;
+}
