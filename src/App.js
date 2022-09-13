@@ -3,21 +3,18 @@ import "./App.css";
 import Rolling from "./assets/Rolling.svg";
 import MonsterRolodexs from "./components/card-list/MonsterRolodexes.component";
 import Input from "./components/input-component/Input.component";
+
 const App = () => {
   const [monsters, setMonsters] = useState([]);
+  const [filterMonsters, setFilterMonsters] = useState(monsters);
   const [searchValue, setSearchValue] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
   const search = (event) => {
     const searchValueString = event.target.value.toLowerCase();
     setSearchValue(searchValueString);
   };
-
-  const filterMonsters = monsters.filter(
-    (monster) =>
-      monster.name.toLowerCase().includes(searchValue) ||
-      monster.username.toLowerCase().includes(searchValue)
-  );
 
   const fetchData = async () => {
     try {
@@ -36,9 +33,21 @@ const App = () => {
       setError(error.message);
     }
   };
+
   useEffect(() => {
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const newFilterMonsters = monsters.filter(
+      (monster) =>
+        monster.name.toLowerCase().includes(searchValue) ||
+        monster.username.toLowerCase().includes(searchValue)
+    );
+    setFilterMonsters(newFilterMonsters);
+  }, [monsters, searchValue]);
+
+  console.log("renderd");
 
   return (
     <Fragment>
