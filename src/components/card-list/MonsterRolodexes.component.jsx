@@ -2,6 +2,7 @@ import "../card-list/monsters.styles.css";
 import MonsterRolodex from "./MonsterRolodex.component";
 
 const MonsterRolodexes = ({ rolodexes }) => {
+  console.log();
   return (
     <div className="MonsterRolodexs">
       {rolodexes.map((item) => {
