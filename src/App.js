@@ -47,8 +47,6 @@ const App = () => {
     setFilterMonsters(newFilterMonsters);
   }, [monsters, searchValue]);
 
-  console.log("renderd");
-
   return (
     <Fragment>
       <h1 className="app-title">Monstert Rolodex</h1>
